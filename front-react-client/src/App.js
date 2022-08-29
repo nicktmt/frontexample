@@ -1,20 +1,19 @@
 import './App.css';
+import React, { Component }  from 'react';
+
 import Dashboard from './components/Dashboard';
 import Header from './components/Layout/Header';
 import "bootstrap/dist/css/bootstrap.min.css";
-import {BroswerRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
+import AddProject from './components/Project/AddProject';
+import Views from './Views';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
 
-    <div className="App">
-      <Header />
-      <Dashboard />
-
-
-    </div>
-    </Router>
+    <Views />
+    </BrowserRouter>
   );
 }
 
