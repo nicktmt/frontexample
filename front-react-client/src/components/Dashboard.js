@@ -14,7 +14,7 @@ import CreateProjectButton from './Project/CreateProjectButton';
                   <CreateProjectButton />
                   <br />
                   <hr />
-
+  <ProjectItem />
              
               </div>
           </div>
