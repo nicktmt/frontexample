@@ -4,6 +4,12 @@ import {connect} from "react-redux"
 import { useNavigate } from 'react-router-dom';
 import {createProject} from "../../actions/projectActions"
 
+function NavigateWrapper(props) {
+    const navigate = useNavigate()
+  
+    return (<NavigateButton navigate={navigate} />)
+  }
+  
 class AddProject extends Component {
 
 
