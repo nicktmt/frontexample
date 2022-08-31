@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
 import {connect} from "react-redux"
+import { useNavigate } from 'react-router-dom';
 import {createProject} from "../../actions/projectActions"
 
-
-
 class AddProject extends Component {
+
+
     
 constructor(){
     super();
@@ -27,6 +28,7 @@ constructor(){
     }
 
     handleSubmit(e){
+
         e.preventDefault();
         const newProject ={
             projectName: this.state.projectName,
@@ -35,8 +37,13 @@ constructor(){
             start_date: this.state.start_date,
             end_date:this.state.end_date
             };
+
+           
         
-        this.props.createProject(newProject);
+            
+            this.props.createProject(newProject, this.props.navigate);
+
+
 
     }
 
@@ -54,7 +61,7 @@ constructor(){
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <input type="text" 
-                            class="form-control form-control-lg " 
+                            className="form-control form-control-lg " 
                             placeholder="Project Name" 
                             name="projectName"
                             value={this.state.projectName}
@@ -62,7 +69,7 @@ constructor(){
                         </div>
                         <div className="form-group">
                             <input type="text" 
-                            class="form-control form-control-lg" 
+                            className="form-control form-control-lg" 
                             placeholder="Unique Project ID"
                             name="projectIdentifier"
                             value={this.state.projectIdentifier}
@@ -72,7 +79,7 @@ constructor(){
 
                         <div className="form-group">
                             <textarea 
-                            class="form-control form-control-lg" 
+                            className="form-control form-control-lg" 
                             placeholder="Project Description"
                             name="description"
                             value={this.state.description} 
@@ -80,7 +87,7 @@ constructor(){
                         </div>
                         <h6>Start Date</h6>
                         <div className="form-group">
-                            <input type="date" class="form-control form-control-lg" 
+                            <input type="date" className="form-control form-control-lg" 
                             name="start_date" 
                             value={this.state.start_date}
                             onChange={this.handleChange}/>
