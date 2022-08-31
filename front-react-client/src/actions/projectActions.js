@@ -21,16 +21,14 @@ import { useNavigate } from 'react-router-dom';
 
 export const createProject = (project, navigate) => async dispatch =>{
 
-try{
-
-        const res= await axios.post("http://localhost:8080/api/project",project);
+const resp = axios.post("http://localhost:8080/api/project",project);
+console.log(resp.data);
+if (resp.status === 200) {
         navigate('/dashboard');
+    }
+   
 
-}catch(err){
-    console.error(err);
 
-
-}
 }
 
 
