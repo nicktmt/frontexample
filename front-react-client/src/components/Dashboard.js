@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import ProjectItem from './Project/ProjectItem';
 import "bootstrap/dist/css/bootstrap.min.css"
 import CreateProjectButton from './Project/CreateProjectButton';
+
+
  class Dashboard extends Component {
+
+  
   render() {
     return  (
       <div className="projects">
@@ -20,6 +24,8 @@ import CreateProjectButton from './Project/CreateProjectButton';
           </div>
       </div>
   </div>
+ 
+  
     );
 
     

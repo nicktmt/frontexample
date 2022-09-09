@@ -1,3 +1,4 @@
+import Testimage from './components/Testimage';
 import React, { Component } from 'react'
 import {Routes, Route} from "react-router-dom";
 import Dashboard from './components/Dashboard';
@@ -11,6 +12,10 @@ class Views extends Component {
             <Route exact path='/' element={ <Header />}/>
             <Route exact path='/dashboard' element={<Dashboard />} />
             <Route exact path='/addProject' element={<AddProject />} />
+
+            <Route exact path='/testimage' element={<Testimage/>} />
+
+
       </Routes>
     );
   }
