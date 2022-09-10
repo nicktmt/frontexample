@@ -1,8 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 class ProjectItem extends Component {
   render() {
+<<<<<<< HEAD
 const {project} = this.props;
+=======
+    const {project} = this.props;
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
 
     return (
       <div className="container">
@@ -12,8 +17,13 @@ const {project} = this.props;
                                   <span className="mx-auto">{project.projectIdentifier}</span>
                               </div>
                               <div className="col-lg-6 col-md-4 col-8">
+<<<<<<< HEAD
                                   <h3>{project.projectName}</h3>
                                   <p>{project.description}</p>
+=======
+                                  <h3>Spring / React Project</h3>
+                                  <p>{project.projectName}</p>
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
                               </div>
                               <div className="col-md-4 d-none d-lg-block">
                                   <ul className="list-group">
@@ -22,11 +32,11 @@ const {project} = this.props;
                                               <i className="fa fa-flag-checkered pr-1">Project Board </i>
                                           </li>
                                       </a>
-                                      <a href="#">
+                                      <Link to={`/updateProject/${project.projectIdentifier}`}>
                                           <li className="list-group-item update">
                                               <i className="fa fa-edit pr-1">Update Project Info</i>
                                           </li>
-                                      </a>
+                                      </Link>
                                       <a href="">
                                           <li className="list-group-item delete">
                                               <i className="fa fa-minus-circle pr-1">Delete Project</i>

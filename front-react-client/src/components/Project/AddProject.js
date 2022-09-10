@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {createProject} from "../../actions/projectActions";
 import classnames from "classnames";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
   
 class AddProject extends Component {
 
@@ -24,12 +28,24 @@ constructor(){
 
     }
 
+<<<<<<< HEAD
     componentWillReceiveProps(nextProps){
         if(nextProps.errors){
             this.setState({errors:nextProps.errors});
         }
     }
 
+=======
+
+    //lifecycle hooks
+    componentWillReceiveProps(nextProps){
+        if(nextProps.errors){
+            this.setState({errors: nextProps.errors});
+        }
+    }
+
+
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
@@ -58,9 +74,15 @@ constructor(){
 
 
   render() {
+<<<<<<< HEAD
     const {errors} = this.state;
+=======
+const {errors} = this.state;
+
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
 
     return (
+        <div>
         <div className="project">
         <div className="container">
             <div className="row">
@@ -70,13 +92,18 @@ constructor(){
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <input type="text" 
+<<<<<<< HEAD
                             className={classnames("form-control form-control-lg",{
                                 "is-invalid": errors.projectName
                             })}  
+=======
+                            className={classnames("form-control form-control-lg",{"is-invalid":errors.projectName})} 
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
                             placeholder="Project Name" 
                             name="projectName"
                             value={this.state.projectName}
                             onChange={this.handleChange}/>
+<<<<<<< HEAD
                             {errors.projectName && (
                                 <div className="invalid-feedback">{errors.projectName}</div>
                             )}
@@ -86,25 +113,51 @@ constructor(){
                             className={classnames("form-control form-control-lg",{
                                 "is-invalid": errors.projectIdentifier
                             })} 
+=======
+                            {errors.projectName &&(
+                                <div className="invalid-feedback">{errors.projectName}</div>
+                            )}
+
+                        </div>
+                        <div className="form-group">
+                            <input type="text" 
+                            className={classnames("form-control form-control-lg",{"is-invalid":errors.projectIdentifier})} 
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
                             placeholder="Unique Project ID"
                             name="projectIdentifier"
                             value={this.state.projectIdentifier}
                             onChange={this.handleChange}
                                  />
+<<<<<<< HEAD
                             {errors.projectIdentifier && ( <div className="invalid-feedback">{errors.projectIdentifier}</div>)}
+=======
+                                 {errors.projectIdentifier &&(
+                                    <div className="invalid-feedback">{errors.projectIdentifier}</div>
+                                )}
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
 
                         </div>
 
                         <div className="form-group">
                             <textarea 
+<<<<<<< HEAD
                             className={classnames("form-control form-control-lg",{
                                 "is-invalid": errors.description
                             })}  
+=======
+                            className={classnames("form-control form-control-lg",{"is-invalid":errors.description})} 
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
                             placeholder="Project Description"
                             name="description"
                             value={this.state.description} 
                             onChange={this.handleChange}/>
+<<<<<<< HEAD
                             {errors.description && ( <div className="invalid-feedback">{errors.description}</div>)}
+=======
+                            {errors.description && (
+                                <div className="invalid-feedback">{errors.description}</div>
+                            )}
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
 
                         </div>
                         <h6>Start Date</h6>
@@ -128,7 +181,11 @@ constructor(){
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
+=======
+    </div>
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
     );
   }
 }
@@ -140,7 +197,17 @@ const mapStateToProp = state =>({
 AddProject.propTypes = {
     createProject: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
+<<<<<<< HEAD
 }
 export default connect(
     mapStateToProp, {createProject}) 
+=======
+};
+
+const MapStateToProps = state =>({errors: state.errors })
+
+
+export default connect(
+    MapStateToProps, {createProject}) 
+>>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
     (AddProject);
