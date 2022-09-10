@@ -13,9 +13,8 @@ class Views extends Component {
             <Route exact path='/' element={ <Header />}/>
             <Route exact path='/dashboard' element={<Dashboard />} />
             <Route exact path='/addProject' element={<AddProject />} />
-            <Route exact path='/updateProject/:id' element={<UpdateProject/>} />
+            <Route exact path='/updateProject/:id' render={(props) => element={<UpdateProject {...props}/>}} />
 
-            <Route exact path='/testimage' element={<Testimage/>} />
 
 
       </Routes>
