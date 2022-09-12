@@ -43,7 +43,7 @@ componentWillReceiveProps(nextProps) {
     
     this.setState({
         id,
-    projectName,
+        projectName,
         projectIdentifier,
         description,
         start_date,
@@ -67,10 +67,14 @@ componentWillReceiveProps(nextProps) {
                       </div>
                       <div className="form-group">
                           <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID"
+                          name='projectIdentifier'
+                          value={this.state.projectIdentifier}
                               disabled />
                       </div>
                       <div className="form-group">
-                          <textarea className="form-control form-control-lg" placeholder="Project Description"></textarea>
+                          <textarea className="form-control form-control-lg" placeholder="Project Description" 
+                          name='description'
+                          value={this.state.description}/>
                       </div>
                       <h6>Start Date</h6>
                       <div className="form-group">

@@ -3,28 +3,27 @@ import {Link} from "react-router-dom";
 
 class ProjectItem extends Component {
   render() {
-<<<<<<< HEAD
-const {project} = this.props;
-=======
     const {project} = this.props;
->>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
 
     return (
       <div className="container">
                       <div className="card card-body bg-light mb-3">
                           <div className="row">
                               <div className="col-2">
+                              <h3>Project ID</h3>
+
                                   <span className="mx-auto">{project.projectIdentifier}</span>
                               </div>
                               <div className="col-lg-6 col-md-4 col-8">
-<<<<<<< HEAD
-                                  <h3>{project.projectName}</h3>
-                                  <p>{project.description}</p>
-=======
-                                  <h3>Spring / React Project</h3>
+                                  <h3>Project Name</h3>
                                   <p>{project.projectName}</p>
->>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
                               </div>
+
+                              <div className="col-lg-6 col-md-4 col-8">
+                                  <p style={{color: 'Red'}}>Project description</p>
+                                  <p>{project.description}</p>
+                              </div>
+
                               <div className="col-md-4 d-none d-lg-block">
                                   <ul className="list-group">
                                       <a href="#">

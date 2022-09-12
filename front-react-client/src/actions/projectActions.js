@@ -1,12 +1,8 @@
 import axios from "axios";
-<<<<<<< HEAD
-=======
 import { GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./types";
 import { toast } from "react-toastify";
->>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
 import 'react-toastify/dist/ReactToastify.css';
-import { GET_ERRORS, GET_PROJECTS} from "./types";
-
+import {useParams} from 'react-router-dom';
 
 // export const createProject = async(project) =>{
 // try{
@@ -22,21 +18,7 @@ import { GET_ERRORS, GET_PROJECTS} from "./types";
 
   
 // }
-export const createProject = (project) => async dispatch =>{
 
-<<<<<<< HEAD
-try{
-    const resp = await axios.post("http://localhost:8080/api/project",project)
-    window.location.assign('/dashboard')
-}catch(err) {
-    console.log("Loi day nay");
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-    });
-}
-};
-=======
 export const createProject = (project) => async dispatch =>{
 
     try{
@@ -61,28 +43,10 @@ export const createProject = (project) => async dispatch =>{
     };
 
     export const getProject = (id) => async dispatch => {
+
         const res = await axios.get (`http://localhost:8080/api/project/${id}`)
         dispatch({
             type: GET_PROJECT,
             payload: res.data
         });
     };
-
-
-
->>>>>>> 0b29b3e2480db89558bc7a59a36fc2e9c306305f
-
-
-export const getProjects = () => async dispatch => {
-    const res = await axios.get("http://localhost:8080/api/project/all")
-    dispatch ({
-        type: GET_PROJECTS, 
-        payload: res.data
-    });
-};
-
-       
-
-  
-
-
