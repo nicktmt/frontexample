@@ -3,17 +3,43 @@ import { getProject } from '../../actions/projectActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { useParams } from "react-router-dom";
 
 
 class UpdateProject extends Component {
 
-  componentDidMount(){
-    const {id}= useParams();
-    this.props.getProject(id);
-  }
+  State = {id:"",
+    projectName: "",
+        projectIdentifier: "",
+        description: "",
+        start_date:"",
+        end_date:""
+  };
 
-  render() {
+  
+  componentDidMount() {
+    
+    this.props.getProject(this.props.match.params.id);
+}
+
+componentWillReceiveProps(nextProps) {
+    const {id,
+    projectName,
+        projectIdentifier,
+        description,
+        start_date,
+        end_date} = nextProps.project;
+    
+    this.setState({
+        id,
+    projectName,
+        projectIdentifier,
+        description,
+        start_date,
+        end_date
+    });
+}
+
+ render(){
     return (
       <div className="project">
       <div className="container">
@@ -23,7 +49,9 @@ class UpdateProject extends Component {
                   <hr />
                   <form>
                       <div className="form-group">
-                          <input type="text" className="form-control form-control-lg " placeholder="Project Name" />
+                          <input type="text" className="form-control form-control-lg " placeholder="Project Name" 
+                          name='projectName'
+                          value={this.state.projectName}/>
                       </div>
                       <div className="form-group">
                           <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID"
@@ -48,9 +76,9 @@ class UpdateProject extends Component {
       </div>
   </div>
     );
-  }
+  
 }
-
+}
 
 UpdateProject.propTypes = {
   getProject: PropTypes.func.isRequired,
