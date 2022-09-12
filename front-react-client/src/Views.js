@@ -1,4 +1,3 @@
-import Testimage from './components/Testimage';
 import React, { Component } from 'react'
 import {Routes, Route} from "react-router-dom";
 import Dashboard from './components/Dashboard';
@@ -10,12 +9,11 @@ class Views extends Component {
   render() {
     return (
       <Routes>
-            <Route exact path='/' element={ <Header />}/>
+          <Route path='/' element={ <Header />}>
             <Route exact path='/dashboard' element={<Dashboard />} />
             <Route exact path='/addProject' element={<AddProject />} />
-            <Route exact path='/updateProject/:id' render={(props) => element={<UpdateProject {...props}/>}} />
-
-
+            <Route exact path='/updateProject/:id' element={<UpdateProject/>} />
+          </Route>
 
       </Routes>
     );

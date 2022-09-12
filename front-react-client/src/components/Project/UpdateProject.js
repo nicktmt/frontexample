@@ -3,17 +3,39 @@ import { getProject } from '../../actions/projectActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { useParams } from "react-router-dom";
+import {useParams} from 'react-router-dom';
 
+export function withRouter(Children){
+  return(props)=>{
+
+     const match  = {params: useParams()};
+     return <Children {...props}  match = {match}/>
+ }
+}
 
 class UpdateProject extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {
+      id:"",
+      projectName:"",
+      projectIdentifier:"",
+      description:"",
+      start_date:"",
+      end_date:""
+    };
+  }
+ 
   componentDidMount(){
     const {id}= useParams();
+
     this.props.getProject(id);
   }
 
   render() {
+
     return (
       <div className="project">
       <div className="container">
@@ -23,7 +45,9 @@ class UpdateProject extends Component {
                   <hr />
                   <form>
                       <div className="form-group">
-                          <input type="text" className="form-control form-control-lg " placeholder="Project Name" />
+                          <input type="text" className="form-control form-control-lg " placeholder="Project Name" 
+                          name="projectName"
+                          value={this.state.projectName}/>
                       </div>
                       <div className="form-group">
                           <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID"
