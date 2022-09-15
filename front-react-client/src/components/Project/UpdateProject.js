@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getProject } from '../../actions/projectActions';
+import { getProject, createProject } from '../../actions/projectActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
@@ -18,22 +18,35 @@ constructor(){
   super();
   this.state = {
     id:"",
-  projectName: "",
+    projectName: "",
       projectIdentifier: "",
       description: "",
       start_date:"",
-      end_date:""
+      end_date:"",
+      errors: {}
 };
+
+this.onChange = this.onChange.bind(this);
+this.onSubmit = this.onSubmit.bind(this);
+
 }
   
 
   
   componentDidMount() {
-    
-    this.props.getProject(this.props.match.params.id);
+    const {id} = this.props.match.params;
+    this.props.getProject(id);
+
+    // this.props.getProject(this.props.match.params.id);
+
 }
 
+
+
 componentWillReceiveProps(nextProps) {
+    if(nextProps.errors){
+        this.setState({errors: nextProps.errors})
+    }
     const {id,
         projectName,
         projectIdentifier,
@@ -51,7 +64,27 @@ componentWillReceiveProps(nextProps) {
     });
 }
 
+onChange(e){
+    this.setState({ [e.target.name]: e.target.value });
+}
+
+onSubmit(e){
+    e.preventDefault();
+    const updateProject ={
+        id:this.state.id,
+        projectName: this.state.projectName,
+        projectIdentifier: this.state.projectIdentifier,
+        description: this.state.description,
+        start_date:this.state.start_date,
+        end_date:this.state.end_date
+    };
+
+    //pass to create function
+
+    this.props.createProject(updateProject);
+}
  render(){
+    const {errors} = this.state;
     return (
       <div className="project">
       <div className="container">
@@ -59,11 +92,18 @@ componentWillReceiveProps(nextProps) {
               <div className="col-md-8 m-auto">
                   <h5 className="display-4 text-center">Update Project form</h5>
                   <hr />
-                  <form>
+                  <form onSubmit={this.onSubmit}>
                       <div className="form-group">
-                          <input type="text" className="form-control form-control-lg " placeholder="Project Name" 
+                          <input type="text" className={classnames("form-control form-control-lg",
+                          {"is-invalid":errors.projectName})} 
+                          placeholder="Project Name" 
                           name='projectName'
-                          value={this.state.projectName}/>
+                          value={this.state.projectName}
+                          onChange={this.onChange}
+                          />
+                          {errors.projectName &&(
+                            <div className="invalid-feedback">{errors.projectName}</div>
+                        )}
                       </div>
                       <div className="form-group">
                           <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID"
@@ -72,17 +112,29 @@ componentWillReceiveProps(nextProps) {
                               disabled />
                       </div>
                       <div className="form-group">
-                          <textarea className="form-control form-control-lg" placeholder="Project Description" 
+                          <textarea className={classnames("form-control form-control-lg",
+                            {"is-invalid": errors.description}
+                          )} 
+                          placeholder="Project Description" 
                           name='description'
-                          value={this.state.description}/>
+                          value={this.state.description}
+                          onChange={this.onChange}
+                         />
+                         {errors.description &&(
+                            <div className="invalid-feedback">{errors.description}</div>
+                        )}
                       </div>
                       <h6>Start Date</h6>
                       <div className="form-group">
-                          <input type="date" className="form-control form-control-lg" name="start_date" />
+                          <input type="date" className="form-control form-control-lg" name="start_date"
+                          value={this.state.start_date}
+                          onChange={this.onChange} />
                       </div>
                       <h6>Estimated End Date</h6>
                       <div className="form-group">
-                          <input type="date" className="form-control form-control-lg" name="end_date" />
+                          <input type="date" className="form-control form-control-lg" name="end_date" 
+                          value={this.state.end_date}
+                          onChange={this.onChange}/>
                       </div>
 
                       <input type="submit" className="btn btn-primary btn-block mt-4" />
@@ -98,11 +150,14 @@ componentWillReceiveProps(nextProps) {
 
 UpdateProject.propTypes = {
   getProject: PropTypes.func.isRequired,
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
+  createProject: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
-const MapStateToProps = state=>({
-  project: state.project.project
+const mapStateToProps = state=>({
+  project: state.project.project,
+  errors: state.errors
 });
 
-export default connect(MapStateToProps, {getProject})(withRouter(UpdateProject));
+export default connect(mapStateToProps, {getProject,createProject})(withRouter(UpdateProject));
