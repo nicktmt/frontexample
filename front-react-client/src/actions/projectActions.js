@@ -22,7 +22,7 @@ import {useParams} from 'react-router-dom';
 export const createProject = (project) => async dispatch =>{
 
     try{
-        const resp = await axios.post("http://localhost:8080/api/project",project)
+        const resp = await axios.post("/api/project",project)
         window.location.assign('/dashboard');
         dispatch({
             type: GET_ERRORS,
@@ -39,7 +39,7 @@ export const createProject = (project) => async dispatch =>{
     
     
     export const getProjects = () => async dispatch => {
-        const res = await axios.get("http://localhost:8080/api/project/all")
+        const res = await axios.get("/api/project/all")
         dispatch ({
             type: GET_PROJECTS, 
             payload: res.data
@@ -52,7 +52,7 @@ export const createProject = (project) => async dispatch =>{
                 type: GET_ERRORS,
                 payload: {}
             });
-            const res = await axios.get (`http://localhost:8080/api/project/${id}`)
+            const res = await axios.get (`/api/project/${id}`)
             dispatch({
                 type: GET_PROJECT,
                 payload: res.data
@@ -65,9 +65,12 @@ export const createProject = (project) => async dispatch =>{
     };
 
     export const deleteProject = id => async dispatch => {
-        await axios.delete(`http://localhost:8080/api/project/${id}`)
-        dispatch({
-            type: DELETE_PROJECT,
-            payload: id
-        });
+        if(window.confirm("Are you sure want to delete this project")){
+            await axios.delete(`/api/project/${id}`)
+            dispatch({
+                type: DELETE_PROJECT,
+                payload: id
+            });
+        }
+        
     };
