@@ -32,6 +32,9 @@ public class Project {
     private Date create_At;
     private Date update_At;
 
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "project")
+    private Backlog backlog;
+
     //pre persist and preupdate
 
     public Long getId() {
@@ -96,6 +99,14 @@ public class Project {
 
     public void setUpdate_At(Date update_At) {
         this.update_At = update_At;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     @PrePersist
