@@ -1,5 +1,7 @@
 package com.example.frontexample.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -21,8 +23,18 @@ public class ProjectTask {
     private String status;
     private Integer priority;
     private Date dueDate;
+
+    @Column(updatable = false)
+    private String projectIdentifier;
     private Date create_At;
     private Date update_At;
+
+    //@manytoOne
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "backlog_id", updatable = false,nullable = false)
+    @JsonIgnore
+    private Backlog backlog;
 
     @PrePersist
     protected void onCreate(){
@@ -32,6 +44,14 @@ public class ProjectTask {
     @PreUpdate
     protected void onUpdate(){
         this.update_At = new Date();
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     public Long getId() {
@@ -106,6 +126,14 @@ public class ProjectTask {
         this.update_At = update_At;
     }
 
+    public String getProjectIdentifier() {
+        return projectIdentifier;
+    }
+
+    public void setProjectIdentifier(String projectIdentifier) {
+        this.projectIdentifier = projectIdentifier;
+    }
+
     @Override
     public String toString() {
         return "ProjectTask{" +
@@ -116,6 +144,7 @@ public class ProjectTask {
                 ", status='" + status + '\'' +
                 ", priority=" + priority +
                 ", dueDate=" + dueDate +
+                ", projectIdentifier=" + projectIdentifier +
                 ", create_At=" + create_At +
                 ", update_At=" + update_At +
                 '}';

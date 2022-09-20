@@ -1,6 +1,10 @@
 package com.example.frontexample.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Backlog {
@@ -14,9 +18,12 @@ public class Backlog {
     //OnetoOne with project
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", nullable = false)
+    @JsonIgnore
     private Project project;
-    //OneToMany projecttasks
 
+    //OneToMany projecttasks
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "backlog")
+    private List<ProjectTask> projectTasks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -51,7 +58,13 @@ public class Backlog {
     }
 
     public Backlog() {
+    }
 
+    public List<ProjectTask> getProjectTasks() {
+        return projectTasks;
+    }
 
+    public void setProjectTasks(List<ProjectTask> projectTasks) {
+        this.projectTasks = projectTasks;
     }
 }
